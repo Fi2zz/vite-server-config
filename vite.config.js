@@ -1,13 +1,4 @@
-# Reproduce 'vite -- host', server. host=true
-
-Found this issue while developing the plugin
-
-```bash
-   vite --host
-```
-
-```js
-// the plugin
+import { defineConfig } from "vite";
 
 function vitePluginConfigureServer() {
 	return {
@@ -17,6 +8,7 @@ function vitePluginConfigureServer() {
 			var server = resolvedConfig.config.server;
 
 			// `vite --host`
+
 			// server.host got 'true' not 'localhost' or others
 			if (server.host == true) {
 				throw `'server.host' expected be typeof string but got true`;
@@ -31,12 +23,5 @@ function vitePluginConfigureServer() {
 		},
 	};
 }
-```
-
-```js
-// vite.config.js
-
-import { defineConfig } from "vite";
 
 export default defineConfig({ plugins: [vitePluginConfigureServer()] });
-```
